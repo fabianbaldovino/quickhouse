@@ -6,7 +6,7 @@ Formulário online para o cliente preencher o briefing. Hospedado no GitHub Page
 
 1. **Crie a planilha.** Abra sheets.new e dê um nome, ex.: "Briefings — Vídeo Institucional".
 2. **Cole o script.** Na planilha: *Extensões → Apps Script*. Apague o conteúdo de `Código.gs` e cole o arquivo [`apps-script/Code.gs`](apps-script/Code.gs). Salve.
-   - (Opcional) Preencha `NOTIFY_EMAIL` com seu e-mail para receber um aviso a cada envio.
+   - Cada envio também chega por e-mail em contato@fabian.art.br (variável `NOTIFY_EMAIL`).
 3. **Autorize.** No seletor de funções escolha `setup` e clique em *Executar*. Aceite as permissões. A aba "Briefings" aparece com o cabeçalho.
 4. **Publique.** *Implantar → Nova implantação → tipo: App da Web*.
    - Executar como: **Eu**

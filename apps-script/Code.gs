@@ -28,8 +28,8 @@ const COLUMNS = [
   ['observacoes',    '9. Algo mais?'],
 ];
 
-// Opcional: coloque seu e-mail para receber um aviso a cada briefing enviado.
-const NOTIFY_EMAIL = '';
+// Cada briefing enviado também chega neste e-mail (deixe '' para desligar).
+const NOTIFY_EMAIL = 'contato@fabian.art.br';
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
