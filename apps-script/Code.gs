@@ -39,7 +39,7 @@ function doPost(e) {
     const sheet = getSheet_();
     const p = e.parameters || {};
     const row = COLUMNS.map(([key]) => {
-      if (key === 'recebido_em') return new Date();
+      if (key === 'recebido_em') return Utilities.formatDate(new Date(), 'America/Sao_Paulo', 'dd/MM/yyyy HH:mm:ss');
       const v = p[key];
       return v ? v.join(', ') : '';
     });
