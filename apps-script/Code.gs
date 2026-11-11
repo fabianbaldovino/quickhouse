@@ -1,8 +1,9 @@
 /**
  * Recebe os envios do formulário de briefing e grava na planilha.
- * Cole este código em Extensões > Apps Script de uma Planilha Google.
+ * Projeto Apps Script (script.google.com) ligado à planilha pelo SPREADSHEET_ID.
  */
 
+const SPREADSHEET_ID = '14GSkl-Nfick1f8QBnUwNvYSUrMaxuyFx5AeEk4G9u4g';
 const SHEET_NAME = 'Briefings';
 
 // Ordem das colunas na planilha: [chave do formulário, título da coluna]
@@ -62,7 +63,7 @@ function doPost(e) {
 }
 
 function getSheet_() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   let sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) sheet = ss.insertSheet(SHEET_NAME);
   if (sheet.getLastRow() === 0) {
