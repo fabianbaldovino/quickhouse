@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Briefing de Produção — Vídeo Institucional</title>
+<meta name="description" content="Preencha o briefing do seu vídeo institucional.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F6FB; --card:#FFFFFF; --ink:#0D1330; --muted:#5A6283; --line:#DDE2EF;
+    --accent:#3450FF; --accent-soft:#E8ECFF; --ok:#0E9F6E; --err:#D92D4B;
+    --r:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2{font-family:"Bricolage Grotesque",Inter,sans-serif;letter-spacing:-.02em;margin:0}
+
+  /* Hero */
+  .hero{background:var(--ink);color:#fff;padding:72px 24px 120px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%,#5C74FF 0%,#3450FF 40%,transparent 70%);opacity:.55}
+  .hero .wrap{position:relative;z-index:1}
+  .eyebrow{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:#B8C3FF;border:1px solid #2C3768;border-radius:99px;padding:6px 12px;margin-bottom:22px}
+  .hero h1{font-size:clamp(34px,6vw,60px);line-height:1.02;font-weight:700;max-width:760px}
+  .hero h1 em{font-style:normal;color:#8FA0FF}
+  .hero p{color:#C7CDE6;max-width:620px;font-size:18px;margin:20px 0 0}
+  .hero .meta{display:flex;gap:22px;flex-wrap:wrap;margin-top:28px;color:#9AA3C7;font-size:14px}
+  .hero .meta b{color:#fff;font-weight:600}
+
+  .wrap{max-width:820px;margin:0 auto}
+  main{padding:0 20px 80px;margin-top:-72px;position:relative;z-index:2}
+
+  /* Progress */
+  .progress{position:sticky;top:0;z-index:5;background:rgba(244,246,251,.92);backdrop-filter:blur(8px);
+    margin:0 -20px 18px;padding:12px 20px;display:flex;align-items:center;gap:14px;font-size:13px;color:var(--muted)}
+  .bar{flex:1;height:6px;background:var(--line);border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .35s ease}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px;margin-bottom:16px;
+    box-shadow:0 1px 2px rgba(13,19,48,.04)}
+  .card h2{font-size:22px;display:flex;align-items:baseline;gap:12px}
+  .num{font-family:"Bricolage Grotesque",sans-serif;font-size:14px;font-weight:700;color:var(--accent);
+    background:var(--accent-soft);border-radius:8px;padding:3px 9px;flex:none}
+  .hint{color:var(--muted);font-size:14px;margin:6px 0 18px}
+  .tag{font-size:12px;font-weight:600;color:var(--muted);background:#EEF1F7;border-radius:6px;padding:2px 8px;margin-left:auto;font-family:Inter,sans-serif}
+  .req{color:var(--err)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:620px){.grid2{grid-template-columns:1fr}.card{padding:22px}}
+
+  label.f{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+  input[type=text],input[type=email],input[type=tel],input[type=date],textarea{
+    width:100%;font:inherit;color:var(--ink);background:#FAFBFE;border:1.5px solid var(--line);border-radius:10px;
+    padding:12px 14px;transition:border-color .15s,box-shadow .15s}
+  textarea{min-height:120px;resize:vertical}
+  input:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);background:#fff}
+
+  /* Option chips */
+  .opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+  .opts.three{grid-template-columns:repeat(3,1fr)}
+  @media (max-width:620px){.opts.three{grid-template-columns:1fr}}
+  .opt{position:relative}
+  .opt input{position:absolute;opacity:0;pointer-events:none}
+  .opt span{display:flex;align-items:center;gap:10px;min-height:52px;padding:12px 14px;border:1.5px solid var(--line);
+    border-radius:10px;cursor:pointer;background:#FAFBFE;font-size:15px;transition:all .15s;user-select:none}
+  .opt span::before{content:"";flex:none;width:18px;height:18px;border:1.5px solid #B4BCD4;border-radius:5px;background:#fff;transition:all .15s}
+  .opt input[type=radio]+span::before{border-radius:50%}
+  .opt span:hover{border-color:#A9B6FF}
+  .opt input:checked+span{border-color:var(--accent);background:var(--accent-soft);color:var(--ink);font-weight:500}
+  .opt input:checked+span::before{background:var(--accent);border-color:var(--accent);
+    box-shadow:inset 0 0 0 3px #fff}
+  .opt input:focus-visible+span{box-shadow:0 0 0 4px var(--accent-soft)}
+  .other{margin-top:10px;display:none}
+  .other.show{display:block}
+
+  .field-err{color:var(--err);font-size:13px;margin-top:8px;display:none}
+  .invalid .field-err{display:block}
+  .invalid input[type=text],.invalid input[type=email],.invalid input[type=tel]{border-color:var(--err)}
+  .card.invalid{border-color:#F3B4C0}
+
+  /* Submit */
+  .submit{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:8px}
+  button{font:600 16px Inter,sans-serif;color:#fff;background:var(--accent);border:0;border-radius:12px;
+    padding:16px 28px;cursor:pointer;transition:transform .1s,background .15s;display:inline-flex;gap:10px;align-items:center}
+  button:hover{background:#2238E0}
+  button:active{transform:translateY(1px)}
+  button[disabled]{opacity:.6;cursor:progress}
+  .small{font-size:13px;color:var(--muted)}
+  .msg{padding:14px 16px;border-radius:10px;font-size:15px;display:none}
+  .msg.err{display:block;background:#FDECEF;color:#9B1C33}
+
+  .done{display:none;text-align:center;padding:56px 28px}
+  .done .check{width:64px;height:64px;border-radius:50%;background:#E3F7EF;color:var(--ok);display:grid;place-items:center;margin:0 auto 18px;font-size:30px}
+  .done h2{font-size:30px;margin-bottom:10px}
+  .done p{color:var(--muted);max-width:460px;margin:0 auto}
+
+  footer{text-align:center;color:var(--muted);font-size:13px;padding:0 20px 40px}
+  .spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:s .7s linear infinite;display:none}
+  button[disabled] .spin{display:inline-block}
+  @keyframes s{to{transform:rotate(360deg)}}
+  .hp{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Briefing de produção</span>
+    <h1>Vídeo <em>institucional</em>: o filme da sua marca.</h1>
+    <p>De 1 a 5 minutos. Com estas respostas a gente monta o roteiro em atos e tudo o que a produção precisa: locução, perguntas das entrevistas, lista de captação, trilha, ritmo e a cor de cada momento.</p>
+    <div class="meta"><span><b>9</b> seções</span><span><b>~8 min</b> para preencher</span><span>O progresso fica salvo neste navegador</span></div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <div class="progress" aria-hidden="true"><span id="progTxt">0% preenchido</span><div class="bar"><i id="progBar"></i></div></div>
+
+  <form id="form" novalidate>
+    <input class="hp" type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <!-- Identificação -->
+    <section class="card" data-req="id">
+      <h2><span class="num">00</span>Identificação</h2>
+      <p class="hint">Quem está preenchendo este briefing.</p>
+      <div class="grid2">
+        <div><label class="f" for="empresa">Empresa / Marca <span class="req">*</span></label><input type="text" id="empresa" name="empresa" required autocomplete="organization"></div>
+        <div><label class="f" for="data">Data</label><input type="date" id="data" name="data"></div>
+        <div><label class="f" for="responsavel">Responsável pelo preenchimento <span class="req">*</span></label><input type="text" id="responsavel" name="responsavel" required autocomplete="name"></div>
+        <div><label class="f" for="cargo">Cargo</label><input type="text" id="cargo" name="cargo" autocomplete="organization-title"></div>
+        <div><label class="f" for="email">E-mail <span class="req">*</span></label><input type="email" id="email" name="email" required autocomplete="email"></div>
+        <div><label class="f" for="telefone">Telefone / WhatsApp</label><input type="tel" id="telefone" name="telefone" autocomplete="tel"></div>
+      </div>
+      <p class="field-err">Preencha empresa, responsável e um e-mail válido.</p>
+    </section>
+
+    <!-- 1 -->
+    <section class="card" data-req="radio" data-name="abordagem">
+      <h2><span class="num">01</span>Abordagem <span class="req">*</span></h2>
+      <p class="hint">Assinale a opção desejada.</p>
+      <div class="opts three">
+        <label class="opt"><input type="radio" name="abordagem" value="Documental"><span>Documental</span></label>
+        <label class="opt"><input type="radio" name="abordagem" value="Roteirizado"><span>Roteirizado</span></label>
+        <label class="opt"><input type="radio" name="abordagem" value="Híbrido"><span>Híbrido</span></label>
+      </div>
+      <p class="field-err">Escolha uma abordagem.</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="card" data-req="radio" data-name="duracao">
+      <h2><span class="num">02</span>Duração do filme <span class="req">*</span></h2>
+      <p class="hint">Assinale o tempo estimado.</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="duracao" value="1 min"><span>1 min</span></label>
+        <label class="opt"><input type="radio" name="duracao" value="1 min 30 s"><span>1 min 30 s</span></label>
+        <label class="opt"><input type="radio" name="duracao" value="2 min"><span>2 min</span></label>
+        <label class="opt"><input type="radio" name="duracao" value="3 min"><span>3 min</span></label>
+        <label class="opt"><input type="radio" name="duracao" value="4 min"><span>4 min</span></label>
+        <label class="opt"><input type="radio" name="duracao" value="5 min"><span>5 min</span></label>
+        <label class="opt"><input type="radio" name="duracao" value="Outra" data-other="duracao_outra"><span>Outra</span></label>
+      </div>
+      <div class="other" id="duracao_outra_wrap"><input type="text" id="duracao_outra" name="duracao_outra" placeholder="Qual duração?"></div>
+      <p class="field-err">Escolha uma duração.</p>
+    </section>
+
+    <!-- 3 -->
+    <section class="card" data-req="check" data-name="objetivo">
+      <h2><span class="num">03</span>Objetivo <span class="req">*</span></h2>
+      <p class="hint">Pode assinalar mais de uma opção.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" name="objetivo" value="Apresentar a empresa a quem não conhece"><span>Apresentar a empresa a quem não conhece</span></label>
+        <label class="opt"><input type="checkbox" name="objetivo" value="Dar credibilidade em vendas e parcerias"><span>Dar credibilidade em vendas e parcerias</span></label>
+        <label class="opt"><input type="checkbox" name="objetivo" value="Celebrar um marco"><span>Celebrar um marco (aniversário, nova fase)</span></label>
+        <label class="opt"><input type="checkbox" name="objetivo" value="Mostrar a cultura e atrair talentos"><span>Mostrar a cultura e atrair talentos</span></label>
+        <label class="opt"><input type="checkbox" name="objetivo" value="Contar o propósito e a origem"><span>Contar o propósito e a origem</span></label>
+        <label class="opt"><input type="checkbox" name="objetivo" value="Outro" data-other="objetivo_outro"><span>Outro</span></label>
+      </div>
+      <div class="other" id="objetivo_outro_wrap"><input type="text" id="objetivo_outro" name="objetivo_outro" placeholder="Especifique o objetivo"></div>
+      <p class="field-err">Escolha pelo menos um objetivo.</p>
+    </section>
+
+    <!-- 4 -->
+    <section class="card">
+      <h2><span class="num">04</span>Onde o filme vai passar</h2>
+      <p class="hint">Canais de exibição previstos.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" name="canais" value="Site e YouTube"><span>Site e YouTube</span></label>
+        <label class="opt"><input type="checkbox" name="canais" value="LinkedIn"><span>LinkedIn</span></label>
+        <label class="opt"><input type="checkbox" name="canais" value="Reunião comercial e propostas"><span>Reunião comercial e propostas</span></label>
+        <label class="opt"><input type="checkbox" name="canais" value="Evento, feira ou telão"><span>Evento, feira ou telão</span></label>
+        <label class="opt"><input type="checkbox" name="canais" value="Integração de novos funcionários"><span>Integração de novos funcionários</span></label>
+        <label class="opt"><input type="checkbox" name="canais" value="TV ou cinema"><span>TV ou cinema</span></label>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="card">
+      <h2><span class="num">05</span>Recursos de produção</h2>
+      <p class="hint">Estrutura desejada para a captação.</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="recursos" value="Celular e uma pessoa"><span>Celular e uma pessoa</span></label>
+        <label class="opt"><input type="radio" name="recursos" value="Equipe pequena (câmera, luz, som)"><span>Equipe pequena (câmera, luz, som)</span></label>
+        <label class="opt"><input type="radio" name="recursos" value="Produção completa (equipe, elenco, edição)"><span>Produção completa (equipe, elenco, edição)</span></label>
+        <label class="opt"><input type="radio" name="recursos" value="Outro" data-other="recursos_outro"><span>Outro</span></label>
+      </div>
+      <div class="other" id="recursos_outro_wrap"><input type="text" id="recursos_outro" name="recursos_outro" placeholder="Especifique"></div>
+    </section>
+
+    <!-- 6 -->
+    <section class="card">
+      <h2><span class="num">06</span>Fatos e marcos da empresa <span class="tag">Opcional</span></h2>
+      <p class="hint">Ano de fundação, números expressivos, conquistas, certificações ou grandes viradas da marca.</p>
+      <textarea name="marcos" aria-label="Fatos e marcos da empresa"></textarea>
+    </section>
+
+    <!-- 7 -->
+    <section class="card">
+      <h2><span class="num">07</span>Quem pode dar entrevista <span class="tag">Opcional</span></h2>
+      <p class="hint">Nome, cargo ou papel das pessoas que podem representar a empresa nos depoimentos.</p>
+      <textarea name="entrevistados" aria-label="Quem pode dar entrevista"></textarea>
+    </section>
+
+    <!-- 8 -->
+    <section class="card">
+      <h2><span class="num">08</span>Locações disponíveis <span class="tag">Opcional</span></h2>
+      <p class="hint">Sedes, fábricas, escritórios, obras ou espaços disponíveis para gravação (indique cidade/estado).</p>
+      <textarea name="locacoes" aria-label="Locações disponíveis"></textarea>
+    </section>
+
+    <!-- 9 -->
+    <section class="card">
+      <h2><span class="num">09</span>Algo mais? <span class="tag">Opcional</span></h2>
+      <p class="hint">Referências visuais, restrições de prazo, cuidados de comunicação ou observações adicionais.</p>
+      <textarea name="observacoes" aria-label="Observações adicionais"></textarea>
+    </section>
+
+    <div class="submit">
+      <div class="msg" id="msg" role="alert"></div>
+      <button type="submit" id="btn"><span class="spin"></span><span id="btnTxt">Enviar briefing</span></button>
+      <span class="small">Campos com <span class="req">*</span> são obrigatórios.</span>
+    </div>
+  </form>
+
+  <section class="card done" id="done" aria-live="polite">
+    <div class="check">✓</div>
+    <h2>Briefing recebido!</h2>
+    <p>Obrigado. Agora a gente transforma estas respostas no roteiro e no plano de produção e entra em contato em breve.</p>
+  </section>
+
+</div>
+</main>
+
+<footer>Briefing de Produção · Vídeo Institucional</footer>
+
+<script>
+/* ==== CONFIGURAÇÃO ====
+   Cole aqui a URL do App Script (termina em /exec). Veja o README. */
+const SCRIPT_URL = "COLE_AQUI_A_URL_DO_APPS_SCRIPT";
+/* ===================== */
+
+const form = document.getElementById('form');
+const DRAFT_KEY = 'briefing-video-institucional-v1';
+
+// Data de hoje por padrão
+const dataEl = document.getElementById('data');
+if (!dataEl.value) dataEl.value = new Date().toLocaleDateString('sv-SE');
+
+// Campo "Outro/Outra"
+function syncOthers(){
+  form.querySelectorAll('input[data-other]').forEach(inp=>{
+    const wrap = document.getElementById(inp.dataset.other + '_wrap');
+    wrap.classList.toggle('show', inp.checked);
+  });
+}
+
+// Rascunho local
+function saveDraft(){
+  try{
+    const d = {};
+    new FormData(form).forEach((v,k)=>{ if(k==='_hp') return; (d[k] ||= []).push(v); });
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(d));
+  }catch(e){}
+}
+function loadDraft(){
+  try{
+    const d = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null');
+    if(!d) return;
+    Object.entries(d).forEach(([k,vals])=>{
+      form.querySelectorAll(`[name="${k}"]`).forEach(el=>{
+        if(el.type==='checkbox'||el.type==='radio') el.checked = vals.includes(el.value);
+        else el.value = vals[0] ?? '';
+      });
+    });
+  }catch(e){}
+}
+
+// Progresso
+function progress(){
+  const cards = [...form.querySelectorAll('.card')];
+  const filled = cards.filter(c=>{
+    return [...c.querySelectorAll('input,textarea')].some(el=>
+      el.name!=='_hp' && el.name!=='data' && ((el.type==='checkbox'||el.type==='radio') ? el.checked : el.value.trim()!==''));
+  }).length;
+  const pct = Math.round(filled / cards.length * 100);
+  document.getElementById('progBar').style.width = pct + '%';
+  document.getElementById('progTxt').textContent = pct + '% preenchido';
+}
+
+// Validação
+function validate(){
+  let firstBad = null;
+  form.querySelectorAll('.card[data-req]').forEach(c=>{
+    let ok = true;
+    if(c.dataset.req==='id'){
+      ok = ['empresa','responsavel'].every(n=>form[n].value.trim()) &&
+           /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim());
+    } else {
+      ok = !!form.querySelector(`[name="${c.dataset.name}"]:checked`);
+    }
+    c.classList.toggle('invalid', !ok);
+    if(!ok && !firstBad) firstBad = c;
+  });
+  if(firstBad) firstBad.scrollIntoView({behavior:'smooth', block:'center'});
+  return !firstBad;
+}
+
+form.addEventListener('input', ()=>{ syncOthers(); saveDraft(); progress();
+  form.querySelectorAll('.card.invalid').forEach(c=>c.classList.remove('invalid')); });
+form.addEventListener('change', ()=>{ syncOthers(); saveDraft(); progress(); });
+
+form.addEventListener('submit', async e=>{
+  e.preventDefault();
+  const msg = document.getElementById('msg');
+  msg.className = 'msg';
+  if(!validate()) return;
+  if(form._hp.value) return; // robô
+
+  if(!SCRIPT_URL.startsWith('https://')){
+    msg.className = 'msg err';
+    msg.textContent = 'Este formulário ainda não está conectado à planilha. Avise a produtora.';
+    return;
+  }
+
+  const btn = document.getElementById('btn');
+  btn.disabled = true; document.getElementById('btnTxt').textContent = 'Enviando…';
+
+  const body = new URLSearchParams();
+  new FormData(form).forEach((v,k)=>{ if(k!=='_hp') body.append(k, v); });
+  body.append('enviado_em', new Date().toISOString());
+
+  try{
+    await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', body });
+    try{ localStorage.removeItem(DRAFT_KEY); }catch(e){}
+    form.style.display = 'none';
+    document.querySelector('.progress').style.display = 'none';
+    const done = document.getElementById('done');
+    done.style.display = 'block';
+    done.scrollIntoView({behavior:'smooth', block:'center'});
+  }catch(err){
+    msg.className = 'msg err';
+    msg.textContent = 'Não foi possível enviar agora. Verifique sua conexão e tente de novo — suas respostas continuam salvas aqui.';
+    btn.disabled = false; document.getElementById('btnTxt').textContent = 'Enviar briefing';
+  }
+});
+
+loadDraft(); syncOthers(); progress();
+</script>
+</body>
+</html>
